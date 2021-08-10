@@ -1,0 +1,274 @@
+{% extends 'master.html' %}
+{% block content %}
+{% load static %}
+		<!-- breadcrumbs-area-start -->
+		<div class="breadcrumbs-area mb-70">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="breadcrumbs-menu">
+							<ul>
+								<li><a href="#">Home</a></li>
+								<li><a href="#" class="active">my-account</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- breadcrumbs-area-end -->
+		<!-- entry-header-area-start -->
+		<div class="entry-header-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="entry-header-title">
+							<h2>My-Account</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- entry-header-area-end -->
+		<!-- my account wrapper start -->
+        <div class="my-account-wrapper mb-70">
+            <div class="container">
+                <div class="section-bg-color">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- My Account Page Start -->
+                            <div class="myaccount-page-wrapper">
+                                <!-- My Account Tab Menu Start -->
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4">
+                                        <div class="myaccount-tab-menu nav" role="tablist">
+                                            <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>
+                                                Dashboard</a>
+                                            <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
+                                                Orders</a>
+<!--                                            <a href="#download" data-toggle="tab"><i class="fa fa-cloud-download"></i>-->
+<!--                                                Download</a>-->
+                                            <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i>
+                                                Payment
+                                                Details</a>
+                                            <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i>
+                                                address</a>
+                                            <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> Account
+                                                Details</a>
+                                            <a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a>
+                                        </div>
+                                    </div>
+                                    <!-- My Account Tab Menu End -->
+
+                                    <!-- My Account Tab Content Start -->
+                                    <div class="col-lg-9 col-md-8">
+                                        <div class="tab-content" id="myaccountContent">
+                                            <!-- Single Tab Content Start -->
+                                            <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
+                                                <div class="myaccount-content">
+                                                    <h5>Dashboard</h5>
+                                                    <div class="welcome">
+                                                        <p>Hello, <strong>{{ data.first_name }}</strong> (If Not <strong>{{ data.first_name }}
+                                                            !</strong><a href="{% url 'logout' %}" class="logout"> Logout</a>)</p>
+                                                    </div>
+                                                    <p class="mb-0">From your account dashboard. you can easily check &
+                                                        view your recent orders, manage your shipping and billing addresses
+                                                        and edit your password and account details.</p>
+
+                                                </div>
+                                                <center>
+                                                        {% for i in messages %}
+                                                    <h1>{{ i }}</h1>
+                                                        {% endfor %}
+                                                    </center>
+                                            </div>
+                                            <!-- Single Tab Content End -->
+
+                                            <!-- Single Tab Content Start -->
+                                            <div class="tab-pane fade" id="orders" role="tabpanel">
+                                                <div class="myaccount-content">
+                                                    <h5>Orders</h5>
+                                                    <div class="myaccount-table table-responsive text-center">
+                                                        <table class="table table-bordered">
+                                                            <thead class="thead-light">
+                                                                <tr>
+                                                                    <th>Date</th>
+                                                                    <th>Orderid</th>
+                                                                    <th>Details</th>
+                                                                    <th>Status</th>
+                                                                    <th>Total</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {% for i in Oreder_data %}
+                                                                <tr>
+                                                                    <td>{{i.date}}</td>
+                                                                    <td>{{i.order_id}}</td>
+                                                                    <td>{{i.order_details}}</td>
+                                                                    <td>{{i.status}}</td>
+                                                                    <td>{{i.total}}</td>
+                                                                    <td><object data="{{ i.qrcode.url }}" type="application/pdf" width="150" height="200">
+                                                                    <a target="_blank" href="{{ i.qrcode.url }}">View</a>
+                                                                     </object></td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Single Tab Content End -->
+
+                                            <!-- Single Tab Content Start -->
+                                            <div class="tab-pane fade" id="download" role="tabpanel">
+                                                <div class="myaccount-content">
+<!--                                                    <h5>Downloads</h5>-->
+<!--                                                    <div class="myaccount-table table-responsive text-center">-->
+<!--                                                        <table class="table table-bordered">-->
+<!--                                                            <thead class="thead-light">-->
+<!--                                                                <tr>-->
+<!--                                                                    <th>Product</th>-->
+<!--                                                                    <th>Date</th>-->
+<!--                                                                    <th>Expire</th>-->
+<!--                                                                    <th>Download</th>-->
+<!--                                                                </tr>-->
+<!--                                                            </thead>-->
+<!--                                                            <tbody>-->
+<!--                                                                <tr>-->
+<!--                                                                    <td>Haven - Free Real Estate PSD Template</td>-->
+<!--                                                                    <td>Aug 22, 2018</td>-->
+<!--                                                                    <td>Yes</td>-->
+<!--                                                                    <td><a href="#" class="btn btn-sqr"><i-->
+<!--                                                                        class="fa fa-cloud-download"></i>-->
+<!--                                                                            Download File</a></td>-->
+<!--                                                                </tr>-->
+<!--                                                                <tr>-->
+<!--                                                                    <td>HasTech - Profolio Business Template</td>-->
+<!--                                                                    <td>Sep 12, 2018</td>-->
+<!--                                                                    <td>Never</td>-->
+<!--                                                                    <td><a href="#" class="btn btn-sqr"><i-->
+<!--                                                                        class="fa fa-cloud-download"></i>-->
+<!--                                                                            Download File</a></td>-->
+<!--                                                                </tr>-->
+<!--                                                            </tbody>-->
+<!--                                                        </table>-->
+<!--                                                    </div>-->
+                                                </div>
+                                            </div>
+                                            <!-- Single Tab Content End -->
+
+                                            <!-- Single Tab Content Start -->
+                                            <div class="tab-pane fade" id="payment-method" role="tabpanel">
+                                                <div class="myaccount-content">
+                                                    <h5>Payment Details</h5>
+                                                    <div class="myaccount-table table-responsive text-center">
+                                                        <table class="table table-bordered">
+                                                            <thead class="thead-light">
+                                                                <tr>
+<!--                                                                    <th>Date</th>-->
+                                                                    <th>BANKTXNID</th>
+                                                                    <th>TXNID</th>
+                                                                    <th>Orderid</th>
+
+                                                                    <th>PAYMENTMODE</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            {% for i in Oreder_data %}
+                                                                <tr>
+<!--                                                                    <td>{{i.Date}}</td>-->
+                                                                    <td>{{i.BANKTXNID}}</td>
+                                                                    <td>{{i.TXNID}}</td>
+                                                                    <td>{{i.order_id}}</td>
+
+                                                                    <td>{{i.paymentmode}}</td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+<!--                                                    <p class="saved-message">You Can't Saved Your Payment Method yet.</p>-->
+                                                </div>
+                                            </div>
+                                            <!-- Single Tab Content End -->
+
+                                            <!-- Single Tab Content Start -->
+                                            <div class="tab-pane fade" id="address-edit" role="tabpanel">
+                                                <div class="myaccount-content">
+                                                    <h5>Billing Address</h5>
+                                                    <form method="POST">{% csrf_token %}
+                                                    <address>
+                                                        <p><strong><textarea rows="4" cols="50" name="message" placeholder="Address">{{ data.first_name }} {{ data.address }}
+                                                             {{ data.pincode}}
+                                                            {{ data.mobile_no }}</textarea></strong></p>
+                                                    </address>
+                                                    <a href="" class="btn btn-sqr"><i class="fa fa-edit"></i>
+                                                        Edit Address</a>
+                                                        </form>
+                                                </div>
+                                            </div>
+                                            <!-- Single Tab Content End -->
+
+                                            <!-- Single Tab Content Start -->
+                                            <div class="tab-pane fade" id="account-info" role="tabpanel">
+                                                <div class="myaccount-content">
+                                                    <h5>Account Details</h5>
+                                                    <div class="account-details-form">
+                                                        <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+                                                                <div class="single-input-item">
+                                                                <label for="" class="required">Profile Image</label><br>
+                                                                <img src="{{data.profile_image.url}}" height="100" width="100" style ="border-radius: 50%; " class="p-2" ><br>
+                                                                 <label for="" class="required">Change Image</label><br>
+                                                                <input type="file"  id="rumit" name="img" accept="">
+<!--                                                                <input type="text" id="display-name" placeholder="Display Name" />-->
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item">
+                                                                        <label for="first-name" class="required">First
+                                                                            Name</label>
+                                                                        <input type="text" value="{{ data.first_name }}"  id="first-name" placeholder= 'First Name' name="first name"  />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item">
+                                                                        <label for="last-name" class="required">Last
+                                                                            Name</label>
+                                                                        <input type="text" value="{{ data.last_name }}" id="last-name" placeholder="Last Name" name ='last name' />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="single-input-item">
+                                                                <label for="email" class="required">Email Addres</label>
+                                                                <input type="email"  value="{{ data.email }}" id="email" placeholder="Email Address" name="email" />
+                                                            </div>
+                                                            <fieldset>
+                                                                <legend>Password change</legend>
+                                                                <div class="single-input-item">
+                                                                    <label for="current-pwd" class="required">Current
+                                                                        Password</label>
+                                                                    <input type="text" value="{{ data.password }}" id="current-pwd" placeholder="Current Password" name="current password" />
+                                                                </div>
+                                                            </fieldset>
+                                                            <div class="single-input-item">
+                                                                <button class="btn btn-sqr">Save Changes</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- Single Tab Content End -->
+                                        </div>
+                                    </div> <!-- My Account Tab Content End -->
+                                </div>
+                            </div> <!-- My Account Page End -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- my account wrapper end -->
+	{% endblock %}
